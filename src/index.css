@@ -1,0 +1,49 @@
+:root {
+  /* Fonts */
+  --primary-font: "Poppins", sans-serif;
+
+  /*  */
+  --primary-300: #fff9f0;
+  --secondary-300: #9fa0a4;
+  --tertiary-300: #dadada;
+  --quaternary-300: #383838;
+
+  /*  */
+  --white-100: #ffffff;
+  --white-300: #f7f7f7;
+  --gray-100: #e1e1e6;
+  --gray-300: #c4c4c6;
+  --gray-400: #8d8d99;
+  --gray-600: #323238;
+  --gray-700: #29292e;
+  --gray-800: #202024;
+  --gray-900: #121214;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+*::selection {
+  color: #a4a4a4;
+  background: var(--tertiary-300);
+}
+
+body {
+  background: var(--white-100);
+  color: var(--gray-800);
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: var(--primary-font);
+  font-weight: 400;
+  font-size: 1rem;
+}
