@@ -1,9 +1,13 @@
+/**
+ *
+ */
 import * as React from "react";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import AddIcon from "@mui/icons-material/Add";
 
-function IconButtons(props) {
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
+import Tooltip from "@mui/material/Tooltip";
+
+export default function IconButtons(props) {
   return (
     <Tooltip title={props.tooltip || ""}>
       <IconButton

@@ -2,8 +2,9 @@
  *
  */
 import * as React from "react";
-import Grid from "@mui/material/Grid";
+
 import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -12,7 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function BasicGrid(props) {
+export default function BasicGrid(props) {
   return (
     <Grid container spacing={props.spacing || 2}>
       {props.items.map((item, index) => (

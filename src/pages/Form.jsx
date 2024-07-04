@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import CircularIndeterminate from "../components/Loading";
 import BasicTextField from "../components/TextField";
 import FeedbackSnackbar from "../components/Alert";
+import Checkboxes from "../components/Checkbox";
 import BasicButton from "../components/Button";
 import Panel from "../layouts/Panel";
 import { fakeCreate } from "../utils/data";
@@ -15,29 +16,39 @@ export default function CreateItem() {
   /* creating action */
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
+    if (!acceptedTerms) {
+      handleOpenSnackbar({
+        severity: "warning",
+        message: "Você precisa aceitar os termos para criar um novo item.",
+      });
+
+      return;
+    }
+
     const newItem = { name, description };
 
-    setIsLoadingAnimation(true);
-
-    fakeCreate(newItem).then((response) => {
+    try {
+      setIsLoadingAnimation(true);
+      await fakeCreate(newItem);
+      handleOpenSnackbar({
+        severity: "success",
+        message: "Nova adição: o conteúdo foi criado conforme solicitado.",
+      });
+      setName("");
+      setDescription("");
+      setAcceptedTerms(false);
+    } catch (error) {
+      console.error(`error on create: ${error.message}`);
+      handleOpenSnackbar({
+        severity: "error",
+        message: error.message,
+      });
+    } finally {
       setIsLoadingAnimation(false);
-
-      if (response.success) {
-        handleOpenSnackbar({
-          severity: "success",
-          message: "Nova adição: o conteúdo foi criado conforme solicitado.",
-        });
-        setName("");
-        setDescription("");
-      } else {
-        handleOpenSnackbar({
-          severity: "error",
-          message: error.message,
-        });
-      }
-    });
+    }
   };
 
   /* snackbar feedback */
@@ -64,6 +75,13 @@ export default function CreateItem() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        <Stack direction="row" alignItems="center">
+          <Checkboxes
+            checked={acceptedTerms}
+            onChange={(e) => setAcceptedTerms(e.target.checked)}
+          />
+          <label>Aceitar os termos</label>
+        </Stack>
         <BasicButton onClick={handleCreate}>
           {isLoadingAnimation ? (
             <CircularIndeterminate size={25} color="inherit" />

@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 
 import AccountMenu from "../components/AccountMenu";
-import { mainListItems, secondaryListItems } from "../components/ListItems";
+import { mainListItems, secondaryListItems } from "../components/Navbar";
 
 const drawerWidth = 240;
 
